@@ -4,22 +4,39 @@ if [[ $# -ne 1 ]]; then
     exit 1
     fi
 
-if [[ $1 =~ ^[\ ]*$ ]]; then
+
+silence () {
+    [[ $1 =~ ^[\ ]*$ ]]
+}
+
+yelling () {
+    [[ $1 =~ ^[A-Z\ ]+\.$ ]]
+}
+
+yellingQuestion () {
+    [[ $1 =~ ^[A-Z\ ]+\?$ ]]
+}
+
+askingQuestion () {
+    [[ $1 =~ ^[A-Za-z\ ]+\?$ ]]
+}
+
+if silence; then
     echo "Fine. Be that way!"
     exit 1
     fi
 
-if [[ $1 =~ ^[A-Z\ ]+\.$ ]]; then
+if yelling; then
     echo "Whoa, chill out!"
     exit 1
     fi
 
-if [[ $1 =~ ^[A-Z\ ]+\?$ ]]; then
+if yellingQuestion; then
     echo "Calm down, I know what I'm doing!"
     exit 1
     fi
 
-if [[ $1 =~ ^[A-Za-z\ ]+\?$ ]]; then
+if askingQuestion; then
     echo "Sure."
     exit 1
     fi
